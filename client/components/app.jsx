@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import ListDisplay from '../containers/listDisplay.jsx';
-import ItemCreator from './itemCreator.jsx';
+import ItemCreator from '../containers/itemCreator.jsx';
 
 
 
