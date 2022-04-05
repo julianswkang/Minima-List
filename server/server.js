@@ -33,11 +33,8 @@ app.use(express.json());
 * ***** DEFINING ROUTES *******
 */
 
-// const updateRouter = require('./routes/update');
-// app.use('/update', updateRouter);
-
-
-
+const updateRouter = require('./routes/update.js');
+app.use('/update', updateRouter);
 
 
 /*
@@ -47,18 +44,11 @@ app.get('/', (req,res) => {
   return res.status(200).sendFile(path.resolve(__dirname, '../client/index.html'));
 });
 
-
-
-
-
 /*
  ******* CATCH-ALL ROUTE HANDLER FOR UNKNOWN ROUTES *******
  */
 // catch-all route handler for any requests to an unknown route
 app.use((req, res) => res.status(404).send('Can\'t find it!'));
-
-
-
 
 /*
 ****** GLOBAL ERROR HANDLER ******

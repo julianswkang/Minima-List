@@ -9,7 +9,7 @@ const Schema = mongoose.Schema;
 // priority level, that is a string, required
 
 const listSchema = new Schema({
-  listItem: {type: String, required: true},
+  listItem: {type: String, required: true, unique: true},
   priority: {type: String, required: true}
 });
 

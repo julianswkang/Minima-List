@@ -41,8 +41,8 @@ module.exports={
       publicPath: 'build',
       directory: path.resolve(__dirname, 'build')
     },
-    // proxy: {
-    //   '/update': 'http://localhost:3000'
-    // }
+    proxy: {
+      '/update': 'http://localhost:3000'
+    }
   }
 }
