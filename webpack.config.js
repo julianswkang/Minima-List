@@ -2,16 +2,18 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports={
-  entry: path.join(__dirname, 'index.js'),
+  entry: path.join(__dirname, 'client/index.js'),
 
   output: {
     path: path.join(__dirname, 'build'),
     filename: 'bundle.js'
   },
-  mode: 'production',
+
+  mode: process.env.NODE_ENV,
+
   plugins: [
     new HtmlWebpackPlugin({
-      template: path.join(__dirname, 'index.html')
+      template: path.join(__dirname, 'client/index.html')
     })
   ],
 
@@ -32,5 +34,15 @@ module.exports={
         use: ['style-loader', 'css-loader']
       }
     ]
+  },
+
+  devServer: {
+    static: {
+      publicPath: 'build',
+      directory: path.resolve(__dirname, 'build')
+    },
+    // proxy: {
+    //   '/update': 'http://localhost:3000'
+    // }
   }
 }

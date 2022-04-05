@@ -33,8 +33,8 @@ app.use(express.json());
 * ***** DEFINING ROUTES *******
 */
 
-const updateRouter = require('./routes/update');
-app.use('/update', updateRouter);
+// const updateRouter = require('./routes/update');
+// app.use('/update', updateRouter);
 
 
 
@@ -44,7 +44,7 @@ app.use('/update', updateRouter);
  ****** ROUTE HANDLER TO RESPOND WITH THE MAIN APPLICATION ****** 
 */
 app.get('/', (req,res) => {
-  return res.status(200).sendFile(path.resolve(__dirname, 'index.html'));
+  return res.status(200).sendFile(path.resolve(__dirname, '../client/index.html'));
 });
 
 
