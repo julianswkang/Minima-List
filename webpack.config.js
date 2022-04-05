@@ -8,7 +8,7 @@ module.exports={
     path: path.join(__dirname, 'build'),
     filename: 'bundle.js'
   },
-
+  mode: 'production',
   plugins: [
     new HtmlWebpackPlugin({
       template: path.join(__dirname, 'index.html')
