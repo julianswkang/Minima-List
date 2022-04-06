@@ -12,7 +12,7 @@ const ItemCreator = (props) => {
         <label>
           Priority Level: 
           <select onChange={((e) => props.handleChange(e))}>
-            <option value='null'>Select One</option>
+            <option>Select One</option>
             <option value='High'>High</option>
             <option value='Moderate'>Moderate</option>
             <option value='Low'>Low</option>

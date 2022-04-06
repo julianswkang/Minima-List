@@ -81,7 +81,8 @@ class App extends React.Component{
     }).then(response => response.json())
       .then((list) => {
         this.setState({
-          itemList: list
+          itemList: list,
+          listItem: ''
         })
     })
     
