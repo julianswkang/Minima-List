@@ -20,6 +20,8 @@ class ListDisplay extends React.Component{
           priority={priority} 
           date={date} 
           key={_id}
+          id={_id}
+          handleDelete={this.props.handleDelete}
         />
       )
     }

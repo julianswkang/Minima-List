@@ -12,9 +12,11 @@ class App extends React.Component{
       listItem: '',
       priority: '',
       itemList: [],
+      points: 0,
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   componentDidMount(){
@@ -72,12 +74,30 @@ class App extends React.Component{
 
   }
 
+  handleDelete(e){
+    console.log('this one needs to be deleted: ', e);
+    fetch('/update', {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        _id: e
+      })
+    }).then(response => response.json())
+      .then((list) => {
+        this.setState({
+          itemList: list
+        })
+      })
+  }
+
   render(){
     return(
       <div id='app'>
         <h1>THE HANDY DANDY TO-DO LIST!</h1>
         <ItemCreator text={this.state.listItem} handleSubmit={this.handleSubmit} handleChange={this.handleChange}/>
-        <ListDisplay list={this.state.itemList}/>
+        <ListDisplay handleDelete={this.handleDelete} list={this.state.itemList}/>
 
       </div>
     )

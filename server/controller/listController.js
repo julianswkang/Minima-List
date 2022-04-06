@@ -38,10 +38,10 @@ listController.getItems = function (req, res, next) {
 
 listController.editItem = function(req, res, next) {
 
-  const {listItem, priority, newItem, newPriority} = req.body;
+  const {_id, newItem, newPriority} = req.body;
   // {new: true} --> ensures that 'updated' is the updated list item
   // compared to without it, where update would be the old list item
-  Todo.findOneAndUpdate({listItem}, {listItem: edit, priority: newPriority}, {new: true})
+  Todo.findOneAndUpdate({ _id}, {listItem: newItem, priority: newPriority}, {new: true})
     .then(updated => {
       console.log(updated);
       res.locals.updated = updated;
@@ -56,9 +56,9 @@ listController.editItem = function(req, res, next) {
 };
 
 listController.deleteItem = function (req, res, next){
-  const { listItem } = req.body;
+  const { _id } = req.body;
 
-  Todo.findOneAndDelete({listItem})
+  Todo.findOneAndDelete({ _id })
     .then(deleted => {
       res.locals.deleted = deleted;
       return next();

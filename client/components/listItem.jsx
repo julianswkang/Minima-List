@@ -21,7 +21,7 @@ const listItem = (props) => (
     </div>
 
     <div className='deleteButton'>
-      <button>Delete</button>
+      <button onClick={() => props.handleDelete(props.id)}>Delete</button>
     </div>
 
   </div>
