@@ -15,7 +15,7 @@ class ItemCreator extends React.Component{
   }
 
   handleChange(e) {
-    console.log('text is added and event type is: ', e.target.type)
+    // console.log('text is added and event type is: ', e.target.type)
     if (e.target.type === 'text'){
       this.setState({
         listItem: e.target.value
@@ -53,7 +53,7 @@ class ItemCreator extends React.Component{
         <input type='text' onChange={this.handleChange} required/>
         
         <label>
-          Priority level:
+          Priority Level: 
           <select onChange={this.handleChange}>
             <option value='High'>High</option>
             <option value='Moderate'>Moderate</option>

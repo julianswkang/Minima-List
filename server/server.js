@@ -39,10 +39,15 @@ app.use('/update', updateRouter);
 
 /*
  ****** ROUTE HANDLER TO RESPOND WITH THE MAIN APPLICATION ****** 
+ Note: only to be used when in production mode, since development mode uses webpack server
 */
-app.get('/', (req,res) => {
-  return res.status(200).sendFile(path.resolve(__dirname, '../client/index.html'));
-});
+if (process.env.NODE_ENV === 'production'){
+  app.use('/', express.static(path.join(__dirname, '../build')));
+  app.get('/', (req,res) => {
+    return res.status(200).sendFile(path.join(__dirname, '../client/index.html'));
+  });
+}
+
 
 /*
  ******* CATCH-ALL ROUTE HANDLER FOR UNKNOWN ROUTES *******
