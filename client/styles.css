@@ -4,3 +4,71 @@
 body{
   font-family: 'Montserrat', sans-serif;
 }
+
+h1{
+  text-align: center;
+}
+
+form{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 100%;
+  margin: 30px;
+}
+
+input[type=text]{
+  width: 50%;
+  padding: 10px 10px;
+  box-sizing: border-box;
+  margin: 10px;
+}
+
+input[type=text]:focus {
+  border: 2px solid #168AAD;
+  transition: border ease 0.4s;
+}
+
+input[type=submit]{
+  padding: 10px 10px;
+  border-radius: 3px;
+  border: 1px solid darkgray;
+  margin: 10px;
+  width: 100px;
+}
+
+input[type=submit]:hover{
+  background-color: darkgray;
+  transition: background-color ease 0.4s;
+}
+
+.listBox{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: space-between;
+}
+
+.listBox h3{
+  text-align: center;
+}
+
+.listItem{
+  display: grid;
+  justify-items: center;
+  margin: 10px 0px;
+  grid-template-columns: 60% 20% 20%;
+  grid-row-gap: 10px;
+  grid-column-gap: 10px;
+}
+
+.deleteButton button{
+  padding: 5px 5px;
+  border-radius: 3px;
+  border: 1px solid darkgray;
+  width: 75px;
+}
+
+.pointsBox{
+  text-align: center;
+}
