@@ -25,6 +25,10 @@ class ItemCreator extends React.Component{
         </label>
         <input type='submit' value='Add'/>
       </form>
+
+      <div className="pointsBox">
+        Points: {this.props.points}
+      </div>
      </div>
     );
   }

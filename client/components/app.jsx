@@ -18,12 +18,14 @@ class App extends React.Component{
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
   }
-
+ /*
+ ****** THIS WILL PERFORM GET REQUEST TO SERVER/DATABASE TO RETRIEVE LIST OF ITEMS *******
+ */
   componentDidMount(){
     console.log('going to fetch');
     fetch('/update')
       .then(response => {
-        console.log('this is the response', response)
+        // console.log('this is the response', response)
         return response.json();
       })
       .then(list => {
@@ -37,6 +39,9 @@ class App extends React.Component{
       })
   }
 
+ /*
+ ******* THIS WILL WORK TO UPDATE THE STATE AS THE USER IS TYPING OR SELECTING A PRIORITY LEVEL ******
+ */
   handleChange(e) {
     // console.log('text is added and event type is: ', e.target.type)
     // console.log('text value is: ', e.target.value)
@@ -50,9 +55,17 @@ class App extends React.Component{
         priority: e.target.value
       })
     }
+    // console.log('text value is: ', this.state.listItem)
+    //console.log('text value is: ', this.state.priority)
   }
 
+/**
+ ********* THIS PROVIDES USER FUNCTIONALITY TO SUBMIT A TO-DO ITEM INTO THE LIST *********
+ NOTE: THIS WILL ALSO STORE THE ADDED ITEM INTO THE DATABASE
+ */
   handleSubmit(e){
+    // console.log('text value is: ', this.state.listItem)
+    // console.log('priority is: ', this.state.priority)
     //console.log('this is what is in e: ', e.target.value)
     e.preventDefault(); // this prevents the form from firing!
     // console.log('the event is:', e);
@@ -71,18 +84,31 @@ class App extends React.Component{
           itemList: list
         })
     })
-
+    
   }
+  /*
+  ****** THIS PROVIDES FUNCTIONALITY THAT ALLOWS USER TO REMOVE A TO-DO ITEM *******
+  NOTE: THIS WILL WORK TO DELETE THE ITEM FROM THE DATABASE
+  */
+  handleDelete(id, priority){
+    // console.log('this one needs to be deleted: ', id);
+    // this will provide details of the point system and 
+    const pointSystem = {
+      "High": 5,
+      "Moderate": 3,
+      "Low": 1
+    };
+    this.setState((prevState) =>({
+      points: prevState.points + pointSystem[priority]
+    }))
 
-  handleDelete(e){
-    console.log('this one needs to be deleted: ', e);
     fetch('/update', {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        _id: e
+        _id: id
       })
     }).then(response => response.json())
       .then((list) => {
@@ -96,8 +122,16 @@ class App extends React.Component{
     return(
       <div id='app'>
         <h1>THE HANDY DANDY TO-DO LIST!</h1>
-        <ItemCreator text={this.state.listItem} handleSubmit={this.handleSubmit} handleChange={this.handleChange}/>
-        <ListDisplay handleDelete={this.handleDelete} list={this.state.itemList}/>
+        <ItemCreator 
+          text={this.state.listItem} 
+          handleSubmit={this.handleSubmit} 
+          handleChange={this.handleChange}
+          points={this.state.points}
+        />
+        <ListDisplay 
+          handleDelete={this.handleDelete} 
+          list={this.state.itemList}
+        />
 
       </div>
     )

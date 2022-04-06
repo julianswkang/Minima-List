@@ -16,12 +16,12 @@ const listItem = (props) => (
       {props.priority}
     </div>
 
-    <div className='editButton'>
+    {/* <div className='editButton'>
       <button>Edit</button>
-    </div>
+    </div> */}
 
     <div className='deleteButton'>
-      <button onClick={() => props.handleDelete(props.id)}>Delete</button>
+      <button onClick={() => props.handleDelete(props.id, props.priority)}>Finished</button>
     </div>
 
   </div>
