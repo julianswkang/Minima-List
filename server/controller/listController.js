@@ -5,10 +5,10 @@ const listController = {};
 
 listController.addItem = function (req, res, next) {
   const { listItem, priority } = req.body;
-
+  console.log('this list item is: ', listItem)
+  console.log('this priority is', priority)
   Todo.create({listItem, priority})
     .then(item => {
-      //console.log(item);
       res.locals.item = item;
       return next();
     }).catch(err => {

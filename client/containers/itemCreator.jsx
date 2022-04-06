@@ -5,57 +5,19 @@ class ItemCreator extends React.Component{
 
   constructor(props){
     super(props);
-    this.state = {
-      listItem: ' ',
-      priority: ' '
-    };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  handleChange(e) {
-    // console.log('text is added and event type is: ', e.target.type)
-    if (e.target.type === 'text'){
-      this.setState({
-        ...this.state,
-        listItem: e.target.value
-      })
-    }
-    else{
-      this.setState({
-        priority: e.target.value
-      })
-    }
-  }
-
-  handleSubmit(e){
-    e.preventDefault(); // this prevents the form from firing!
-    // console.log('the event is:', e);
-    fetch('/update', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        listItem: this.state.listItem,
-        priority: this.state.priority
-      })
-    }).then(()=> {
-      console.log('you have added a list item');
-    })
   }
 
   render(){
     return (
      <div className='itemCreator'>
-       <form onSubmit={this.handleSubmit}>
+       <form onSubmit={((e) => this.props.handleSubmit(e))}>
         <label>To Do: </label>
-        <input type='text' onChange={this.handleChange} required/>
+        <input type='text' onChange={((e) => this.props.handleChange(e))} required/>
         
         <label>
           Priority Level: 
-          <select onChange={this.handleChange}>
+          <select onChange={((e) => this.props.handleChange(e))}>
+            <option value='null'>Select One</option>
             <option value='High'>High</option>
             <option value='Moderate'>Moderate</option>
             <option value='Low'>Low</option>
