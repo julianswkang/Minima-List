@@ -5,7 +5,7 @@ const ItemCreator = (props) => {
   
   return (
     <div className='itemCreator'>
-      <form onSubmit={((e) => tprops.handleSubmit(e))}>
+      <form onSubmit={((e) => props.handleSubmit(e))}>
       <label>To Do: </label>
       <input type='text' value={props.text} onChange={((e) => props.handleChange(e))} required/>
       
