@@ -8,18 +8,18 @@ updateRouter.get('/', listController.getItems, (req, res) => {
 });
 
 // adds a todo to the list of todos
-updateRouter.post('/', listController.addItem, (req, res) => {
-  res.status(200).json(res.locals.item);
+updateRouter.post('/', listController.addItem, listController.getItems, (req, res) => {
+  res.status(200).json(res.locals.items);
 })
 
 // updates a specific todo 
-updateRouter.put('/', listController.editItem, (req, res) => {
-  res.status(200).json(res.locals.updated);
+updateRouter.put('/', listController.editItem, listController.getItems, (req, res) => {
+  res.status(200).json(res.locals.items);
 })
 
 // deletes a todo from the list
-updateRouter.delete('/', listController.deleteItem, (req, res) => {
-  res.status(200).json(res.locals.deleted);
+updateRouter.delete('/', listController.deleteItem, listController.getItems, (req, res) => {
+  res.status(200).json(res.locals.items);
 })
 
 module.exports = updateRouter;

@@ -12,7 +12,7 @@ class ItemCreator extends React.Component{
      <div className='itemCreator'>
        <form onSubmit={((e) => this.props.handleSubmit(e))}>
         <label>To Do: </label>
-        <input type='text' onChange={((e) => this.props.handleChange(e))} required/>
+        <input type='text' value={this.props.text} onChange={((e) => this.props.handleChange(e))} required/>
         
         <label>
           Priority Level: 

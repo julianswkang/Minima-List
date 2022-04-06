@@ -36,8 +36,8 @@ class App extends React.Component{
   }
 
   handleChange(e) {
-    console.log('text is added and event type is: ', e.target.type)
-    console.log('text value is: ', e.target.value)
+    // console.log('text is added and event type is: ', e.target.type)
+    // console.log('text value is: ', e.target.value)
     if (e.target.type === 'text'){
       this.setState({
         listItem: e.target.value
@@ -64,12 +64,10 @@ class App extends React.Component{
         priority: this.state.priority
       })
     }).then(response => response.json())
-      .then(addedItem => {
-      this.setState({
-        listItem: '',
-        priority: '',
-        itemList: [...this.state.itemList, addedItem]
-      })
+      .then((list) => {
+        this.setState({
+          itemList: list
+        })
     })
 
   }
@@ -78,7 +76,7 @@ class App extends React.Component{
     return(
       <div id='app'>
         <h1>THE HANDY DANDY TO-DO LIST!</h1>
-        <ItemCreator handleSubmit={this.handleSubmit} handleChange={this.handleChange}/>
+        <ItemCreator text={this.state.listItem} handleSubmit={this.handleSubmit} handleChange={this.handleChange}/>
         <ListDisplay list={this.state.itemList}/>
 
       </div>
