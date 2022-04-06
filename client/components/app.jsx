@@ -12,7 +12,7 @@ class App extends React.Component{
       <div id='app'>
         <h1>THE HANDY DANDY TO-DO LIST!</h1>
         <ItemCreator />
-        {/* <ListDisplay /> */}
+        <ListDisplay />
       </div>
     )
   }

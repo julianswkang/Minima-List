@@ -18,6 +18,7 @@ class ItemCreator extends React.Component{
     // console.log('text is added and event type is: ', e.target.type)
     if (e.target.type === 'text'){
       this.setState({
+        ...this.state,
         listItem: e.target.value
       })
     }
@@ -47,7 +48,7 @@ class ItemCreator extends React.Component{
 
   render(){
     return (
-     <div>
+     <div className='itemCreator'>
        <form onSubmit={this.handleSubmit}>
         <label>To Do: </label>
         <input type='text' onChange={this.handleChange} required/>
