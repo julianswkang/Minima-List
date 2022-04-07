@@ -1,4 +1,4 @@
-const Todo = require('../models/listItem');
+const User = require('../models/listItem');
 
 
 const listController = {};
@@ -21,19 +21,26 @@ listController.addItem = function (req, res, next) {
 };
 
 listController.getItems = function (req, res, next) {
-
-  Todo.find({})
-    .then(items => {
-      //console.log(items);
-      res.locals.items = items;
-      return next();
-    }).catch(err => {
-      return next({
-        log: "error with listController.getItems" , err,
-        status: 500,
-        message: {err : "There was an error retreiving the to-do item(s)!"}
-      })
+  const {user} = req.body;
+  User.find({user}, 'list points')
+    .then(info => {
+      res.locals.info = info;
     })
+
+  
+
+  // Todo.find({})
+  //   .then(items => {
+  //     //console.log(items);
+  //     res.locals.items = items;
+  //     return next();
+  //   }).catch(err => {
+  //     return next({
+  //       log: "error with listController.getItems" , err,
+  //       status: 500,
+  //       message: {err : "There was an error retreiving the to-do item(s)!"}
+  //     })
+  //   })
 };
 
 listController.editItem = function(req, res, next) {

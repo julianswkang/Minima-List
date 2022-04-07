@@ -10,6 +10,7 @@ const App = (props) => {
   const [priority, setPriority] = useState('');
   const [itemList, setItemList] = useState([]);
   const [points, setPoints] = useState(0);
+  const [user, setUser] = useState('user');
 
   // EQUIVALENT TO COMPONENTDIDMOUNT()
   useEffect(() => {
@@ -17,7 +18,15 @@ const App = (props) => {
   },[])
 
   async function fetchData(){
-    const response = await(fetch('/update'));
+    const response = await(fetch('/update', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        user: user
+      })
+    }));
     const list = await response.json();
     setItemList(list)
   }
