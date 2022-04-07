@@ -3,8 +3,7 @@ const app = express();
 const mongoose = require('mongoose');
 const path = require('path');
 
-
-
+//THIS SHOULD ONLY BE ON THE FEATURE BRANCH
 app.listen(3000, () => {
   console.log('LISTENING ON PORT 3000');
 });
