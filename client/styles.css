@@ -32,13 +32,13 @@ input[type=text]:focus {
 input[type=submit]{
   padding: 10px 10px;
   border-radius: 3px;
-  border: 1px solid darkgray;
+  border: 1px solid rgb(246, 246, 246);
   margin: 10px;
   width: 100px;
 }
 
 input[type=submit]:hover{
-  background-color: darkgray;
+  background-color: rgb(233, 231, 231);
   transition: background-color ease 0.4s;
 }
 
@@ -60,13 +60,20 @@ input[type=submit]:hover{
   grid-template-columns: 60% 20% 20%;
   grid-row-gap: 10px;
   grid-column-gap: 10px;
+  border: 1px solid lightgray;
+  background-color: rgb(246, 246, 246);
+  padding: 8px;
 }
 
 .deleteButton button{
   padding: 5px 5px;
   border-radius: 3px;
-  border: 1px solid darkgray;
+  border: 1px solid lightgray;
   width: 75px;
+}
+
+.deleteButton button:hover{
+  background-color: rgb(246, 246, 246);
 }
 
 .pointsBox{

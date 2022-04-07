@@ -51,6 +51,8 @@ const App = (props) => {
     });
     const list = await response.json();
     setItemList(list);
+    setListItem('');
+    setPriority('');
   }
 
   async function handleDelete(id, priority){

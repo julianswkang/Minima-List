@@ -9,6 +9,7 @@ const ItemCreator = (props) => {
         <form onSubmit={((e) => props.handleSubmit(e))}>
         <label>To Do: </label>
         <input id='formText' type='text' value={props.text} onChange={(e) => props.handleChangeListItem(e.target.value)} required/>
+        
         <label>
           Priority Level: 
           <select onChange={((e) => props.handleChangePriority(e.target.value))}>
