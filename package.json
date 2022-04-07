@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@babel/polyfill": "^7.12.1",
     "express": "^4.17.3",
     "mongoose": "^6.2.10",
     "node": "^17.7.2",
