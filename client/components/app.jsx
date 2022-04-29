@@ -2,10 +2,11 @@ import React, {useState, useEffect} from 'react';
 import { render } from 'react-dom';
 import ListDisplay from '../containers/listDisplay.jsx';
 import ItemCreator from '../containers/itemCreator.jsx';
+import Header from './header.jsx';
 
 const App = (props) => {
 
-
+  const [user, setUser] = useState('');
   const [listItem, setListItem] = useState('');
   const [priority, setPriority] = useState('');
   const [itemList, setItemList] = useState([]);
@@ -13,10 +14,13 @@ const App = (props) => {
 
   // EQUIVALENT TO COMPONENTDIDMOUNT()
   useEffect(() => {
-    fetchData();
+    //if (user){
+      fetchData(user);
+    //}
+    // getDogFact();
   },[])
 
-  async function fetchData(){
+  async function fetchData(username){
     const response = await(fetch('/update'));
     const list = await response.json();
     setItemList(list)
@@ -35,6 +39,13 @@ const App = (props) => {
   //   }).catch(err => {
   //     console.log('There was an error retreiving the to-do list: ', err);
   //   })
+  // }
+
+  // async function getDogFact(){
+  //   console.log('CALLING DOG API')
+  //   const response = await fetch ('/dogfact');
+  //   console.log('response is: ', response);
+    
   // }
 
   async function handleSubmit(e){
@@ -78,6 +89,7 @@ const App = (props) => {
 
   return (
     <div id='app'>
+      <Header />
       <h1>THE HANDY DANDY TO-DO LIST!</h1>
       <ItemCreator 
         text={listItem} 

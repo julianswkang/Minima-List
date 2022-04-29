@@ -24,8 +24,14 @@ const ItemCreator = (props) => {
       </div>
   
       <div className="pointsBox">
-        Points: {props.points}
+        <div>
+          Points: {props.points}
+        </div>
+        <div>
+          <button className='usepoints'>Use points!</button>
+        </div>
       </div>
+      
     </div>
   );
 }

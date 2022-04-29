@@ -32,7 +32,7 @@ input[type=text]:focus {
 input[type=submit]{
   padding: 10px 10px;
   border-radius: 3px;
-  border: 1px solid rgb(246, 246, 246);
+  border: 1px solid lightgray;
   margin: 10px;
   width: 100px;
 }
@@ -47,6 +47,7 @@ input[type=submit]:hover{
   flex-direction: column;
   justify-content: center;
   align-items: space-between;
+  margin-right: 10px;
 }
 
 .listBox h3{
@@ -65,14 +66,14 @@ input[type=submit]:hover{
   padding: 8px;
 }
 
-.deleteButton button{
+button{
   padding: 5px 5px;
   border-radius: 3px;
   border: 1px solid lightgray;
   width: 75px;
 }
 
-.deleteButton button:hover{
+button:hover{
   background-color: rgb(246, 246, 246);
 }
 
