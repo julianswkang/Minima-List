@@ -2,11 +2,11 @@ import React, {useState, useEffect} from 'react';
 import { render } from 'react-dom';
 import ListDisplay from '../containers/listDisplay.jsx';
 import ItemCreator from '../containers/itemCreator.jsx';
-import Header from './header.jsx';
+import Header from '../containers/header.jsx';
 
 const App = (props) => {
 
-  const [user, setUser] = useState('');
+  
   const [listItem, setListItem] = useState('');
   const [priority, setPriority] = useState('');
   const [itemList, setItemList] = useState([]);
@@ -89,7 +89,9 @@ const App = (props) => {
 
   return (
     <div id='app'>
-      <Header />
+      <Header 
+        handleSetUser={props.handleSetUser}
+      />
       <h1>THE HANDY DANDY TO-DO LIST!</h1>
       <ItemCreator 
         text={listItem} 
