@@ -5,6 +5,7 @@ const Signup = (props) => {
     <div id="signup">
       <Header />
       <p>Sign up</p>
+      {/* if successful signup, will need to invoke the props.handleSetUser function to the new user */}
     </div>
     
   )

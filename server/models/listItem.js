@@ -18,3 +18,16 @@ const listSchema = new Schema({
 const Todo = mongoose.model('todo', listSchema);
 
 module.exports = Todo;
+
+//will need to restructure model
+// const newListSchema = newSchema(
+// { 
+//   username: {type: String, required: true, unique: true},
+//   todos: [
+//     {
+//       listItem: {type: String, required: true, unique: true},
+//       priority: {type: String, required: true},
+//       date: {type: Date, default: Date.now()}
+//     }
+//   ]
+// });

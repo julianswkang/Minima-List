@@ -6,6 +6,7 @@ const Login = (props) => {
     <div id="login">
       <Header />
       <p>Log in page!</p>
+      {/* if successful login, will need to invoke the props.handleSetUser function to the new user */}
     </div>
     
   )
