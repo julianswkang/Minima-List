@@ -92,7 +92,7 @@ const App = (props) => {
       <Header 
         handleSetUser={props.handleSetUser}
       />
-      <h1>THE HANDY DANDY TO-DO LIST!</h1>
+      <h1>MINIMA-LIST</h1>
       <ItemCreator 
         text={listItem} 
         handleSubmit={handleSubmit} 

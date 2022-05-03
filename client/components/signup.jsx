@@ -2,7 +2,11 @@ import React, {useState, useEffect} from 'react';
 
 const Signup = (props) => {
   return(
-    <p>Sign up</p>
+    <div id="signup">
+      <Header />
+      <p>Sign up</p>
+    </div>
+    
   )
   
 }

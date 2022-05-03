@@ -11,6 +11,9 @@ const Header = (props) => {
         <Link to="/signup">
           <p>Sign-up!</p>
         </Link>
+        <Link to="/">
+          <p>Home</p>
+        </Link>
       </header>
     </div>
     
