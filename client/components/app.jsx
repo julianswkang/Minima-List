@@ -10,41 +10,34 @@ const App = (props) => {
   const [priority, setPriority] = useState('');
   const [itemList, setItemList] = useState([]);
   const [points, setPoints] = useState(0);
-  const [user, setUser] = useState('user');
+  const [user, setUser] = useState('');
 
   // EQUIVALENT TO COMPONENTDIDMOUNT()
   useEffect(() => {
-    fetchData();
+    if (props.user.length > 0){
+      setUser(props.user);
+      fetchData(user);
+    }
   },[])
 
-  async function fetchData(){
-    const response = await(fetch('/update', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        user: user
-      })
-    }));
+  async function fetchData(user){
+    try{
+      const response = await(fetch('/update/list', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          user: user
+        })
+      }));
     const list = await response.json();
     setItemList(list)
+    }
+    catch(err) {
+      console.log('there was an error retrieving data from database! ', err);
+    }
   }
-  // //PROMISE SYNTAX
-  // function fetchData () {
-  //   console.log('going to fetch');
-  //   fetch('/update')
-  //   .then(response => {
-  //     // console.log('this is the response', response)
-  //     return response.json();
-  //   })
-  //   .then(list => {
-  //     // console.log('this is the list of todos:', list);
-  //     setItemList(list);
-  //   }).catch(err => {
-  //     console.log('There was an error retreiving the to-do list: ', err);
-  //   })
-  // }
 
   async function handleSubmit(e){
     e.preventDefault();

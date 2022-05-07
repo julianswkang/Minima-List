@@ -3,7 +3,7 @@ const updateRouter = express.Router();
 const listController = require('../controller/listController');
 
 // // returns the whole list of todo's from the database
-updateRouter.get('/', listController.getItems, (req, res) => {
+updateRouter.post('/list', listController.getItems, (req, res) => {
   res.status(200).json(res.locals.items);
 });
 

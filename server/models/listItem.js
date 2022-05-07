@@ -21,6 +21,7 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
   user: {type: String, required: true, unique: true},
+  password: {type: String, required: true},
   list: [{
     todo: {type: String, required: true, unique: true},
     priority: {type: String, required: true},
