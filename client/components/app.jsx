@@ -2,10 +2,11 @@ import React, {useState, useEffect} from 'react';
 import { render } from 'react-dom';
 import ListDisplay from '../containers/listDisplay.jsx';
 import ItemCreator from '../containers/itemCreator.jsx';
+import Header from '../containers/header.jsx';
 
 const App = (props) => {
 
-
+  
   const [listItem, setListItem] = useState('');
   const [priority, setPriority] = useState('');
   const [itemList, setItemList] = useState([]);
@@ -38,6 +39,13 @@ const App = (props) => {
       console.log('there was an error retrieving data from database! ', err);
     }
   }
+
+  // async function getDogFact(){
+  //   console.log('CALLING DOG API')
+  //   const response = await fetch ('/dogfact');
+  //   console.log('response is: ', response);
+    
+  // }
 
   async function handleSubmit(e){
     e.preventDefault();
@@ -80,7 +88,10 @@ const App = (props) => {
 
   return (
     <div id='app'>
-      <h1>THE HANDY DANDY TO-DO LIST!</h1>
+      <Header 
+        handleSetUser={props.handleSetUser}
+      />
+      <h1>MINIMA-LIST</h1>
       <ItemCreator 
         text={listItem} 
         handleSubmit={handleSubmit} 

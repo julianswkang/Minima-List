@@ -1,5 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
+import Header from '../containers/header.jsx';
 
 const ItemCreator = (props) => {
   
@@ -24,8 +25,14 @@ const ItemCreator = (props) => {
       </div>
   
       <div className="pointsBox">
-        Points: {props.points}
+        <div>
+          Points: {props.points}
+        </div>
+        <div>
+          <button className='usepoints'>Use points!</button>
+        </div>
       </div>
+      
     </div>
   );
 }
