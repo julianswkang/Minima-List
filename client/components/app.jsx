@@ -6,18 +6,17 @@ import Header from '../containers/header.jsx';
 
 const App = (props) => {
 
-  
   const [listItem, setListItem] = useState('');
   const [priority, setPriority] = useState('');
   const [itemList, setItemList] = useState([]);
   const [points, setPoints] = useState(0);
-  const [user, setUser] = useState('');
+  // const [user, setUser] = useState('');
 
   // EQUIVALENT TO COMPONENTDIDMOUNT()
   useEffect(() => {
     if (props.user.length > 0){
-      setUser(props.user);
-      fetchData(user);
+      //setUser(props.user);
+      fetchData(props.user);
     }
   },[])
 

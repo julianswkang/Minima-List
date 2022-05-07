@@ -42,6 +42,8 @@ app.use(cors());
 
 const updateRouter = require('./routes/update.js');
 app.use('/update', updateRouter);
+const authRouter = require('./router/auth.js');
+app.use('/auth', authRouter);
 
 // app.get('/dogfact', (req,res) => {
 //   res.status(200);

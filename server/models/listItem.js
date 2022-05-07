@@ -20,7 +20,7 @@ const Schema = mongoose.Schema;
 // module.exports = Todo;
 
 const userSchema = new Schema({
-  user: {type: String, required: true, unique: true},
+  username: {type: String, required: true, unique: true},
   password: {type: String, required: true},
   list: [{
     todo: {type: String, required: true, unique: true},
