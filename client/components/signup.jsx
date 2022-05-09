@@ -26,6 +26,7 @@ const Signup = (props) => {
       console.log('there was an error signing up user in database! ', err);
     }
   }
+  console.log("at sign up!");
   return(
     <div id="signup">
       <Header />
@@ -37,9 +38,7 @@ const Signup = (props) => {
         <button type='submit' id='signup-button' onClick={handleSubmit}>Sign Up!</button>
       </div>
     </div>
-    
   )
-  
 }
 
 export default Signup;

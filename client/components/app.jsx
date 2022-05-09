@@ -14,13 +14,16 @@ const App = (props) => {
 
   // EQUIVALENT TO COMPONENTDIDMOUNT()
   useEffect(() => {
-    if (user){
-      //setUser(props.user);
-      console.log("There is a user!");
-      fetchData(user);
-    }
+    console.log("hello");
+    fetchData(user);
+    // if (user){
+    //   //setUser(props.user);
+    //   console.log("There is a user!");
+    //   fetchData(user);
+    // }
   },[])
 
+  //WILL NEED TO RETURN USER AND LIST INFORMATION WITH EACH FETCH
   async function fetchData(user){
     try{
       const response = await(fetch('/update/list', {
