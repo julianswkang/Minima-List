@@ -71,7 +71,7 @@ const App = (props) => {
     setPriority('');
   }
 
-  async function handleDelete(id, priority){
+  async function handleDelete(todo, priority){
     const pointSystem = {
       "High": 5,
       "Moderate": 3,
@@ -85,7 +85,8 @@ const App = (props) => {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        _id: id
+        todo,
+        username
       })
     });
     const list = await response.json();

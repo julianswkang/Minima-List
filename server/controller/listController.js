@@ -39,8 +39,6 @@ listController.addItem = async function (req, res, next) {
       message: {err: 'There was an error when adding a list item'}
     })
   }
-  //first need to find username
-  //then add to that username's todo list
 };
 
 listController.getItems = function (req, res, next) {
@@ -90,19 +88,22 @@ listController.editItem = function(req, res, next) {
 };
 
 listController.deleteItem = function (req, res, next){
-  const { _id } = req.body;
+  const { todo, username } = req.body;
 
-  Todo.findOneAndDelete({ _id })
-    .then(deleted => {
-      res.locals.deleted = deleted;
-      return next();
-    }).catch(err=> {
-      return next({
-        log: "error with listController.deleteItem" , err,
-        status: 500,
-        message: {err : "There was an error deleting the to-do item!"}
-      })
-    })
+  //use $pull to remove specific todo list item
+  //
+
+  // Todo.findOneAndDelete({ _id })
+  //   .then(deleted => {
+  //     res.locals.deleted = deleted;
+  //     return next();
+  //   }).catch(err=> {
+  //     return next({
+  //       log: "error with listController.deleteItem" , err,
+  //       status: 500,
+  //       message: {err : "There was an error deleting the to-do item!"}
+  //     })
+  //   })
 
   //first need to find username
   //then need to get that usernames list 
