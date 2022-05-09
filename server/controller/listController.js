@@ -91,7 +91,12 @@ listController.deleteItem = function (req, res, next){
   const { todo, username } = req.body;
 
   //use $pull to remove specific todo list item
-  //
+  try{
+    await User.updateOne({username}, { $pull : { list: { todo }}})
+    return next();
+  } catch(err){
+    console.log(err);
+  }
 
   // Todo.findOneAndDelete({ _id })
   //   .then(deleted => {
