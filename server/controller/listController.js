@@ -4,7 +4,7 @@ const User = require('../models/listItem');
 const listController = {};
 
 listController.addItem = async function (req, res, next) {
-  const { listItem, priority, user } = req.body;
+  const { listItem, priority, username } = req.body;
   // console.log('this list item is: ', listItem)
   // console.log('this priority is', priority)
   // Todo.create({listItem, priority})
@@ -20,9 +20,24 @@ listController.addItem = async function (req, res, next) {
   //   })
 
   try{
-
+    const found = await User.find({username});
+    if (!found) {
+      return next({
+        log: 'error with listController.addItems', err,
+        status: 500,
+        message: {err : 'There was an error when retrieving a user!'}
+      })
+    }
+    const newList = [...found.list, {todo: listItem, priority: priority}]
+    
+    await User.findOneAndUpdate({username}, {list: newList})
+    return next();
   } catch(err) {
-    console.log(err);
+    return next({
+      log: 'error with listController.addItems', err,
+      status: 500,
+      message: {err: 'There was an error when adding a list item'}
+    })
   }
   //first need to find username
   //then add to that username's todo list
@@ -35,7 +50,7 @@ listController.getItems = function (req, res, next) {
   //     res.locals.info = info;
   //   })
   try{
-    const found = User.find({username});
+    const found = await User.find({username});
     if (!found) {
       return next({
         log: 'error with listController.getItems', err,
