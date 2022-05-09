@@ -3,7 +3,7 @@ const User = require('../models/listItem');
 const authController = {};
 
 //controller function to sign up user
-authController.signUp = function(req, res, next){
+authController.signUp = async function(req, res, next){
   const {username, password} = req.body
   //if username OR password not provided, will send error
   if (!username || !password) {
@@ -43,7 +43,7 @@ authController.signUp = function(req, res, next){
   
 }
 
-authController.logIn = function(req, res, next){
+authController.logIn = async function(req, res, next){
   const {username, password} = req.body
   //if username OR password not provided, will send error
   if (!username || !password) {

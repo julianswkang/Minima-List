@@ -34,7 +34,7 @@ mongoose.connect(MONGO_URI, {
 */
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(cors());
+//app.use(cors());
 
 /*
 * ***** DEFINING ROUTES *******
@@ -42,7 +42,7 @@ app.use(cors());
 
 const updateRouter = require('./routes/update.js');
 app.use('/update', updateRouter);
-const authRouter = require('./router/auth.js');
+const authRouter = require('./routes/auth.js');
 app.use('/auth', authRouter);
 
 // app.get('/dogfact', (req,res) => {

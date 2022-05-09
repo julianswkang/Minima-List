@@ -18,7 +18,7 @@ const Signup = (props) => {
         })
       });
       props.handleSetUser(user);
-      <Redirect to='/' />
+      //<Redirect to='/' />
     }
     catch(err){
       console.log('there was an error signing up user in database! ', err);

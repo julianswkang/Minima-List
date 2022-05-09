@@ -14,8 +14,9 @@ const App = (props) => {
 
   // EQUIVALENT TO COMPONENTDIDMOUNT()
   useEffect(() => {
-    if (props.user.length > 0){
+    if (props.user){
       //setUser(props.user);
+      console.log("There is a user!");
       fetchData(props.user);
     }
   },[])
