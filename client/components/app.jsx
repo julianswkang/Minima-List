@@ -10,14 +10,14 @@ const App = (props) => {
   const [priority, setPriority] = useState('');
   const [itemList, setItemList] = useState([]);
   const [points, setPoints] = useState(0);
-  // const [user, setUser] = useState('');
+  const [user, setUser] = useState('');
 
   // EQUIVALENT TO COMPONENTDIDMOUNT()
   useEffect(() => {
-    if (props.user){
+    if (user){
       //setUser(props.user);
       console.log("There is a user!");
-      fetchData(props.user);
+      fetchData(user);
     }
   },[])
 
@@ -88,9 +88,7 @@ const App = (props) => {
 
   return (
     <div id='app'>
-      <Header 
-        handleSetUser={props.handleSetUser}
-      />
+      <Header />
       <h1>MINIMA-LIST</h1>
       <ItemCreator 
         text={listItem} 

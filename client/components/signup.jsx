@@ -1,9 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import { Redirect } from 'react-router-dom'
+import Header from '../containers/header.jsx';
+import { useNavigate } from 'react-router-dom'
 
 const Signup = (props) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  let navigate = useNavigate();
 
   async function handleSubmit (){
     try{
@@ -17,8 +19,8 @@ const Signup = (props) => {
           password
         })
       });
-      props.handleSetUser(user);
-      //<Redirect to='/' />
+      //props.handleSetUser(user);
+      navigate('/');
     }
     catch(err){
       console.log('there was an error signing up user in database! ', err);

@@ -20,6 +20,12 @@ module.exports={
   module: {
     rules: [
       {
+        test: /\.jsx?$/,
+        include: /node_modules/,
+        enforce: "pre",
+        use: ["source-map-loader"]
+      },
+      {
         test: /\.jsx?/,
         exclude: /node_modules/,
         use: {
