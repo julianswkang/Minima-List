@@ -34,7 +34,7 @@ const App = (props) => {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          user: user
+          user: props.user
         })
       }));
     const list = await response.json();
@@ -54,12 +54,13 @@ const App = (props) => {
 
   async function handleSubmit(e){
     e.preventDefault();
-    const response = await fetch('/update', {
+    const response = await fetch('/update/list', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
+        username: props.user,
         listItem: listItem,
         priority: priority
       })

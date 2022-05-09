@@ -3,33 +3,55 @@ const User = require('../models/listItem');
 
 const listController = {};
 
-listController.addItem = function (req, res, next) {
-  const { listItem, priority } = req.body;
+listController.addItem = async function (req, res, next) {
+  const { listItem, priority, user } = req.body;
   // console.log('this list item is: ', listItem)
   // console.log('this priority is', priority)
-  Todo.create({listItem, priority})
-    .then(item => {
-      res.locals.item = item;
-      return next();
-    }).catch(err => {
-      return next({
-        log: "error with listController.addItem" , err,
-        status: 500,
-        message: {err : "There was an error creating the to-do item!"}
-      })
-    })
+  // Todo.create({listItem, priority})
+  //   .then(item => {
+  //     res.locals.item = item;
+  //     return next();
+  //   }).catch(err => {
+  //     return next({
+  //       log: "error with listController.addItem" , err,
+  //       status: 500,
+  //       message: {err : "There was an error creating the to-do item!"}
+  //     })
+  //   })
 
+  try{
+
+  } catch(err) {
+    console.log(err);
+  }
   //first need to find username
   //then add to that username's todo list
 };
 
 listController.getItems = function (req, res, next) {
-  const {user} = req.body;
-  User.find({user}, 'list points')
-    .then(info => {
-      res.locals.info = info;
+  const { username } = req.body;
+  // User.find({user}, 'list points')
+  //   .then(info => {
+  //     res.locals.info = info;
+  //   })
+  try{
+    const found = User.find({username});
+    if (!found) {
+      return next({
+        log: 'error with listController.getItems', err,
+        status: 500,
+        message: {err : 'There was an error when retrieving list of to-do item(s)!'}
+      })
+    }
+    res.locals.items = found.list;
+    return next();
+  } catch(err){
+    return next({
+      log: 'error with retrieiving list of items from database at getItems',
+      status: 500,
+      message: {err: 'There was an error accessing the database when retrieving to-do items'}
     })
-
+  }
   //will need to find all based on passed in username, and return username and list items 
 };
 
