@@ -15,7 +15,7 @@ const App = (props) => {
   // EQUIVALENT TO COMPONENTDIDMOUNT()
   useEffect(() => {
     //if (user){
-      fetchData(user);
+      fetchData();
     //}
     // getDogFact();
   },[])
