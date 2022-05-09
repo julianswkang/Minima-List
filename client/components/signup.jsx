@@ -26,7 +26,6 @@ const Signup = (props) => {
       console.log('there was an error signing up user in database! ', err);
     }
   }
-
   return(
     <div id="signup">
       <Header />
