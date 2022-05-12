@@ -68,7 +68,7 @@ listController.getItems = async function (req, res, next) {
         message: {err : 'There was an error when retrieving list of to-do item(s)!'}
       })
     }
-    console.log('found user:', found);
+    console.log('found user in listController.getItems:', found);
     res.locals.items = found.list;
     return next();
   } catch(err){

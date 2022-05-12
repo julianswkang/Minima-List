@@ -29,6 +29,8 @@ const Login = (props) => {
       if (response.status === 200){
         console.log('back from logging in')
         props.handleSetUser(username);
+        setUsername('');
+        setPassword('');
         navigate('/')
       }
       

@@ -13,7 +13,7 @@ const sessionController = {};
 sessionController.createSession = async (req, res, next) => {
   try{
     const uuid = uuidv4();
-    const session = Session.create({cookieId: uuid, userId: res.locals.userId});
+    const session = await Session.create({cookieId: uuid, userId: res.locals.userId});
 
     await User.findOneAndUpdate({username: res.locals.username}, {sessionId: session.id});
     res.cookie('ssid', uuid, {httpOnly: true, secure: true, maxAge: 900000})
@@ -31,7 +31,7 @@ sessionController.createSession = async (req, res, next) => {
 sessionController.verifySession = async (req, res, next) => {
   try{
     const {ssid} = req.cookies;
-    const activeSession = Session.findOne({cookieId: ssid})
+    const activeSession = await Session.findOne({cookieId: ssid})
     if (!activeSession){
       return next({
         log: 'Authorization failed',

@@ -6,6 +6,7 @@ const authController = {};
 authController.signUp = async function(req, res, next){
   console.log('here at sign up!');
   const {username, password} = req.body
+  res.locals.username = username;
   //if username OR password not provided, will send error
   if (!username || !password) {
     const err = {
@@ -26,19 +27,21 @@ authController.signUp = async function(req, res, next){
         message: {err: 'Username already exists.'},
       };
       return next(err);
+    } 
+    else {
+      console.log('username is: ', username);
+      console.log('password is: ', password);
+      const newUser = await User.create({username: username, password: password});
+      console.log('new user in authController sign up is:', newUser);
+      res.locals.userId = newUser.id;
+      return next();
     }
     //otherwise, will create a username with stored password 
-    const newUser = User.create({username, password, list:[]})
-      .then(()=> {
-        res.locals.username = username;
-        res.locals.userId = newUser.id;
-        return next();
-      })
-    
+
   }
   catch(e){
     return next({
-      log: 'There was an error accessing the database',
+      log: 'There was an error accessing the database while creating a user',
       status: 500,
       message: {err: 'Error with database'}
     })
@@ -68,7 +71,7 @@ authController.logIn = async function(req, res, next){
       return next(err);
     } 
     else {
-      console.log('user is: ', user);
+      console.log('user in authController.login is: ', user);
       res.locals.userId = user.id;
       if (password === user.password){
         res.locals.username = username;

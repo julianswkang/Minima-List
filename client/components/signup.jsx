@@ -30,6 +30,8 @@ const Signup = (props) => {
       if (response.status === 200){
         console.log('back from signing up!')
         props.handleSetUser(username);
+        setUsername('');
+        setPassword('');
         navigate('/');
       }
       
