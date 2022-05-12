@@ -1,6 +1,7 @@
 const express = require('express');
 const updateRouter = express.Router();
 const listController = require('../controller/listController');
+const sessionController = require('../controller/sessionController');
 
 // // returns the whole list of todo's from the database
 updateRouter.post('/list', listController.getItems, (req, res) => {
@@ -8,18 +9,18 @@ updateRouter.post('/list', listController.getItems, (req, res) => {
 });
 
 // adds a todo to the list of todos
-updateRouter.post('/', listController.addItem, listController.getItems, (req, res) => {
-  res.status(200).json(res.locals.items);
+updateRouter.post('/', listController.addItem, (req, res) => {
+  res.status(200).json(res.locals.updated);
 })
 
 // updates a specific todo 
-updateRouter.put('/', listController.editItem, listController.getItems, (req, res) => {
-  res.status(200).json(res.locals.items);
+updateRouter.put('/', listController.editItem, (req, res) => {
+  res.status(200).json(res.locals.updated);
 })
 
 // deletes a todo from the list
 updateRouter.delete('/', listController.deleteItem, listController.getItems, (req, res) => {
-  res.status(200).json(res.locals.items);
+  res.status(200).json(res.locals.updated);
 })
 
 module.exports = updateRouter;

@@ -27,11 +27,12 @@ authController.signUp = async function(req, res, next){
       return next(err);
     }
     //otherwise, will create a username with stored password 
-    User.create({username, password})
+    const newUser = User.create({username, password})
       .then(()=> {
         res.locals.username = username;
         return next();
       })
+    res.locals.userId = newUser.id;
   }
   catch(e){
     return next({
@@ -64,7 +65,7 @@ authController.logIn = async function(req, res, next){
     if (!user) {
       return next(err);
     }
-
+    res.locals.userId = user.id;
     if (password = user.password){
       res.locals.username = username;
       return next();

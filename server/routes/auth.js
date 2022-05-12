@@ -1,6 +1,7 @@
 const express = require('express');
 const authRouter = express.Router();
 const authController = require('../controller/authController.js');
+const sessionController = require('../controller/sessionController');
 
 authRouter.post('/signup', authController.signUp, (req, res) => {
   res.status(200).json(res.locals.username);

@@ -31,7 +31,7 @@ listController.addItem = async function (req, res, next) {
     const newList = [...found.list, {todo: listItem, priority: priority}]
     
     await User.findOneAndUpdate({username}, {list: newList})
-    res.locals.items = newList;
+    res.locals.updated = newList;
     return next();
   } catch(err) {
     return next({
@@ -88,7 +88,7 @@ listController.editItem = function(req, res, next) {
   Todo.findOneAndUpdate({ _id}, {listItem: newItem, priority: newPriority}, {new: true})
     .then(updated => {
       console.log(updated);
-      res.locals.updated = updated;
+      res.locals.updated = updated.list;
       return next();
     }).catch(err => {
       return next({
@@ -104,7 +104,8 @@ listController.deleteItem = async function (req, res, next){
 
   //use $pull to remove specific todo list item
   try{
-    await User.updateOne({username}, { '$pull' : { 'list': { 'todo': todo }}}, {safe: true})
+    const updated = await User.findOneAndUpdate({username}, { '$pull' : { 'list': { 'todo': todo }}}, {new: true})
+    res.locals.updated = updated.list;
     return next();
   } catch(err){
     return next({
