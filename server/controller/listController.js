@@ -31,6 +31,7 @@ listController.addItem = async function (req, res, next) {
     const newList = [...found.list, {todo: listItem, priority: priority}]
     
     await User.findOneAndUpdate({username}, {list: newList})
+    res.locals.items = newList;
     return next();
   } catch(err) {
     return next({
@@ -39,9 +40,20 @@ listController.addItem = async function (req, res, next) {
       message: {err: 'There was an error when adding a list item'}
     })
   }
+
+  // try{
+  //   await User.updateOne({username}, { '$push' : { 'list': { 'todo': todo }}}, {safe: true})
+  //   return next();
+  // } catch(err){
+  //   return next({
+  //     log: 'error with listController.addItems', err,
+  //     status: 500,
+  //     message: {err: 'There was an error when adding a list item'}
+  //   })
+  // } 
 };
 
-listController.getItems = function (req, res, next) {
+listController.getItems = async function (req, res, next) {
   const { username } = req.body;
   // User.find({user}, 'list points')
   //   .then(info => {
@@ -87,27 +99,27 @@ listController.editItem = function(req, res, next) {
     })
 };
 
-listController.deleteItem = function (req, res, next){
+listController.deleteItem = async function (req, res, next){
   const { todo, username } = req.body;
 
   //use $pull to remove specific todo list item
   try{
-    await User.updateOne({username}, { $pull : { list: { todo }}})
+    await User.updateOne({username}, { '$pull' : { 'list': { 'todo': todo }}}, {safe: true})
     return next();
   } catch(err){
-    console.log(err);
-  }
+    return next({
+      log: "error with listController.deleteItem" , err,
+      status: 500,
+      message: {err : "There was an error deleting the to-do item!"}
+    })
+  } 
 
   // Todo.findOneAndDelete({ _id })
   //   .then(deleted => {
   //     res.locals.deleted = deleted;
   //     return next();
   //   }).catch(err=> {
-  //     return next({
-  //       log: "error with listController.deleteItem" , err,
-  //       status: 500,
-  //       message: {err : "There was an error deleting the to-do item!"}
-  //     })
+  //     
   //   })
 
   //first need to find username

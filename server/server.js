@@ -2,8 +2,8 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const path = require('path');
+const cookieParser = require('cookie-parser')
 
-//THIS SHOULD ONLY BE ON THE FEATURE BRANCH
 app.listen(3000, () => {
   console.log('LISTENING ON PORT 3000');
 });
@@ -34,6 +34,7 @@ mongoose.connect(MONGO_URI, {
 */
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(cookieParser());
 //app.use(cors());
 
 /*
@@ -44,10 +45,6 @@ const updateRouter = require('./routes/update.js');
 app.use('/update', updateRouter);
 const authRouter = require('./routes/auth.js');
 app.use('/auth', authRouter);
-
-// app.get('/dogfact', (req,res) => {
-//   res.status(200);
-// })
 
 /*
  ****** ROUTE HANDLER TO RESPOND WITH THE MAIN APPLICATION ****** 
