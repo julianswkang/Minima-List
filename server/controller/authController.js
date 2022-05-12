@@ -27,7 +27,7 @@ authController.signUp = async function(req, res, next){
       return next(err);
     }
     //otherwise, will create a username with stored password 
-    const newUser = User.create({username, password})
+    const newUser = User.create({username, password, list:[]})
       .then(()=> {
         res.locals.username = username;
         return next();

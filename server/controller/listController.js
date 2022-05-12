@@ -28,7 +28,7 @@ listController.addItem = async function (req, res, next) {
         message: {err : 'There was an error when retrieving a user!'}
       })
     }
-    const newList = [...found.list, {todo: listItem, priority: priority}]
+    const newList = [...found.list, {todo: listItem, priority: priority, date: Date.now()}]
     
     await User.findOneAndUpdate({username}, {list: newList})
     res.locals.updated = newList;

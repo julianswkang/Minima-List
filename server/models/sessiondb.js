@@ -9,7 +9,7 @@ const sessionSchema = new Schema({
     default: Date.now,
     expires: 3600000
   },
-  userId: {type: Schema.types.ObjectId, ref: 'User'}
+  userId: {type: Schema.Types.ObjectId, ref: 'User'}
 });
 
 const Session = mongoose.model('Session', sessionSchema);

@@ -27,6 +27,7 @@ const userSchema = new Schema({
     priority: {type: String, required: true},
     date: {type: Date, default: Date.now()}
   }],
+  sessionId: {type: Schema.Types.ObjectId, ref: 'Session'},
   points: Number
 })
 

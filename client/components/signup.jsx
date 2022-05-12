@@ -19,22 +19,22 @@ const Signup = (props) => {
           password
         })
       });
-      //props.handleSetUser(user);
-      navigate('/');
+      props.handleSetUser(user);
+      //navigate('/');
     }
     catch(err){
       console.log('there was an error signing up user in database! ', err);
     }
   }
-  console.log("at sign up!");
+  //console.log("at sign up!");
   return(
     <div id="signup">
       <Header />
       <p>Sign up</p>
       {/* if successful signup, will need to invoke the props.handleSetUser function to the new user */}
       <div id='signup-inputs'>
-        <input type='text' id='signup-username' placeholder='Enter Username' onChange={() => setUsername(e.target.value)}/>
-        <input tpye='password' id='signup-password' placeholder='Enter Password' onChange={() => setPassword(e.target.value)}/>
+        <input type='text' id='signup-username' placeholder='Enter Username' onChange={(e) => setUsername(e.target.value)}/>
+        <input type='password' id='signup-password' placeholder='Enter Password' onChange={(e) => setPassword(e.target.value)}/>
         <button type='submit' id='signup-button' onClick={handleSubmit}>Sign Up!</button>
       </div>
     </div>

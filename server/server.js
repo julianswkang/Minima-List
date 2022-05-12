@@ -3,6 +3,8 @@ const app = express();
 const mongoose = require('mongoose');
 const path = require('path');
 const cookieParser = require('cookie-parser')
+const updateRouter = require('./routes/update.js');
+const authRouter = require('./routes/auth.js');
 
 app.listen(3000, () => {
   console.log('LISTENING ON PORT 3000');
@@ -23,10 +25,10 @@ mongoose.connect(MONGO_URI, {
   .catch(err => console.log(err));
 
 
-  app.use((req, res, next)=> {
-    res.header('Access-Controll-Allow-Origin', '*');
-    next()
-  })
+  // app.use((req, res, next)=> {
+  //   res.header('Access-Controll-Allow-Origin', '*');
+  //   next()
+  // })
   
 
 /*
@@ -40,10 +42,7 @@ app.use(cookieParser());
 /*
 * ***** DEFINING ROUTES *******
 */
-
-const updateRouter = require('./routes/update.js');
 app.use('/update', updateRouter);
-const authRouter = require('./routes/auth.js');
 app.use('/auth', authRouter);
 
 /*
@@ -61,7 +60,7 @@ if (process.env.NODE_ENV === 'production'){
  ******* CATCH-ALL ROUTE HANDLER FOR UNKNOWN ROUTES *******
  */
 // catch-all route handler for any requests to an unknown route
-app.use((req, res) => res.status(404).send('Can\'t find it!'));
+app.use('/*', (req, res) => res.status(404).send('Can\'t find it!'));
 
 /*
 ****** GLOBAL ERROR HANDLER ******

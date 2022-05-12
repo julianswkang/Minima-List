@@ -19,22 +19,22 @@ const Login = (props) => {
           password
         })
       });
-      //props.handleSetUser(user);
-      navigate('/')
+      props.handleSetUser(user);
+      //navigate('/')
     }
     catch(err){
       console.log('there was an error signing up user in database! ', err);
     }
   }
-  console.log('At log in!');
+  //console.log('At log in!');
   return (
     <div id="login">
     <Header />
       <p>Log in page!</p>
       {/* if successful login, will need to invoke the props.handleSetUser function to the new user */}
       <div id='login-inputs'>
-        <input type='text' id='login-username' placeholder='Enter Username' onChange={() => setUsername(e.target.value)}/>
-        <input tpye='password' id='login-password' placeholder='Enter Password' onChange={() => setPassword(e.target.value)}/>
+        <input type='text' id='login-username' placeholder='Enter Username' onChange={(e) => setUsername(e.target.value)}/>
+        <input type='password' id='login-password' placeholder='Enter Password' onChange={(e) => setPassword(e.target.value)}/>
         <button type='submit' id='login-button' onClick={handleSubmit}> Log In! </button>
       </div>
     </div>
