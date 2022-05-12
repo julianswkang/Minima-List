@@ -30,9 +30,10 @@ authController.signUp = async function(req, res, next){
     const newUser = User.create({username, password, list:[]})
       .then(()=> {
         res.locals.username = username;
+        res.locals.userId = newUser.id;
         return next();
       })
-    res.locals.userId = newUser.id;
+    
   }
   catch(e){
     return next({
