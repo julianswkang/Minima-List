@@ -10,7 +10,6 @@ const App = (props) => {
   const [priority, setPriority] = useState('');
   const [itemList, setItemList] = useState([]);
   const [points, setPoints] = useState(0);
-  
 
   // EQUIVALENT TO COMPONENTDIDMOUNT()
   useEffect(() => {
@@ -27,18 +26,24 @@ const App = (props) => {
 
   //WILL NEED TO RETURN USER AND LIST INFORMATION WITH EACH FETCH
   async function fetchData(user){
+    console.log('user is: ', user);
     try{
-      const response = await(fetch('/update/list', {
+      const response = await fetch('/update/getList', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          user: props.user
+          username: user
         })
-      }));
-    const list = await response.json();
-    setItemList(list)
+      });
+      if (response.status === 200){
+        const list = await response.json();
+        console.log('this is the list: ', list);
+        setItemList(list)
+      }
+      
+      
     }
     catch(err) {
       console.log('there was an error retrieving data from database! ', err);
@@ -54,21 +59,29 @@ const App = (props) => {
 
   async function handleSubmit(e){
     e.preventDefault();
-    const response = await fetch('/update/list', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        username: props.user,
-        listItem: listItem,
-        priority: priority
-      })
-    });
-    const list = await response.json();
-    setItemList(list);
-    setListItem('');
-    setPriority('');
+    try{
+      const response = await fetch('/update/addItem', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          username: props.user,
+          listItem: listItem,
+          priority: priority
+        })
+      });
+      if (response.status === 200){
+        const list = await response.json();
+        setItemList(list);
+        setListItem('');
+        setPriority('');
+      }
+    }
+    catch(err){
+      console.log('There was an error adding an item')
+    }
+    
   }
 
   async function handleDelete(todo, priority){
@@ -90,6 +103,7 @@ const App = (props) => {
       })
     });
     const list = await response.json();
+    //console.log(list.list);
     setItemList(list);
   }
 

@@ -20,7 +20,7 @@ listController.addItem = async function (req, res, next) {
   //   })
 
   try{
-    const found = await User.find({username});
+    const found = await User.findOne({username});
     if (!found) {
       return next({
         log: 'error with listController.addItems', err,
@@ -60,7 +60,7 @@ listController.getItems = async function (req, res, next) {
   //     res.locals.info = info;
   //   })
   try{
-    const found = await User.find({username});
+    const found = await User.findOne({username});
     if (!found) {
       return next({
         log: 'error with listController.getItems', err,
@@ -68,6 +68,7 @@ listController.getItems = async function (req, res, next) {
         message: {err : 'There was an error when retrieving list of to-do item(s)!'}
       })
     }
+    console.log('found user:', found);
     res.locals.items = found.list;
     return next();
   } catch(err){

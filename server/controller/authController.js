@@ -4,6 +4,7 @@ const authController = {};
 
 //controller function to sign up user
 authController.signUp = async function(req, res, next){
+  console.log('here at sign up!');
   const {username, password} = req.body
   //if username OR password not provided, will send error
   if (!username || !password) {
@@ -65,14 +66,19 @@ authController.logIn = async function(req, res, next){
     };
     if (!user) {
       return next(err);
+    } 
+    else {
+      console.log('user is: ', user);
+      res.locals.userId = user.id;
+      if (password === user.password){
+        res.locals.username = username;
+        return next();
+      } 
+      else{
+        return next(err);
+      }
     }
-    res.locals.userId = user.id;
-    if (password = user.password){
-      res.locals.username = username;
-      return next();
-    } else{
-      return next(err);
-    }
+    
   }
   catch (err) {
     const error = {

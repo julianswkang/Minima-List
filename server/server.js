@@ -60,7 +60,7 @@ if (process.env.NODE_ENV === 'production'){
  ******* CATCH-ALL ROUTE HANDLER FOR UNKNOWN ROUTES *******
  */
 // catch-all route handler for any requests to an unknown route
-app.use('/*', (req, res) => res.status(404).send('Can\'t find it!'));
+app.use('/*', (req, res) => res.status(404).send('NOT A ROUTE'));
 
 /*
 ****** GLOBAL ERROR HANDLER ******

@@ -4,12 +4,12 @@ const listController = require('../controller/listController');
 const sessionController = require('../controller/sessionController');
 
 // // returns the whole list of todo's from the database
-updateRouter.post('/list', sessionController.verifySession, listController.getItems, (req, res) => {
+updateRouter.post('/getList', sessionController.verifySession, listController.getItems, (req, res) => {
   res.status(200).json(res.locals.items);
 });
 
 // adds a todo to the list of todos
-updateRouter.post('/', sessionController.verifySession, listController.addItem, (req, res) => {
+updateRouter.post('/addItem', sessionController.verifySession, listController.addItem, (req, res) => {
   res.status(200).json(res.locals.updated);
 })
 

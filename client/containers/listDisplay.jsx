@@ -4,19 +4,19 @@ import ListItem from '../components/listItem.jsx'
 
 
 const ListDisplay = (props) => {
-  
+  console.log(props);
   let listLength = props.list.length;
   let propsList = props.list;
   const list = [];
   for (let i = 0; i < listLength; i++){
-    const {listItem, priority, date, _id} = propsList[i];
+    const {todo, priority, date} = propsList[i];
     list.push(
       <ListItem 
-        todo={listItem} 
+        todo={todo} 
         priority={priority} 
         date={date} 
-        key={_id}
-        id={_id}
+        key={`item${i}`}
+        id={`item${i}`}
         handleDelete={props.handleDelete}
       />
     )
