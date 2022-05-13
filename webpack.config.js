@@ -20,6 +20,12 @@ module.exports={
   module: {
     rules: [
       {
+        test: /\.jsx?$/,
+        include: /node_modules/,
+        enforce: "pre",
+        use: ["source-map-loader"]
+      },
+      {
         test: /\.jsx?/,
         exclude: /node_modules/,
         use: {
@@ -42,7 +48,9 @@ module.exports={
       directory: path.resolve(__dirname, 'build')
     },
     proxy: {
-      '/update': 'http://localhost:3000'
+      '/': 'http://localhost:3000',
+      '/update/*': 'http://localhost:3000',
+      '/auth/*': 'http://localhost:3000'
     }
   }
 }

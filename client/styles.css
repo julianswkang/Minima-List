@@ -24,9 +24,16 @@ input[type=text]{
   margin: 10px;
 }
 
-input[type=text]:focus {
+input:focus {
   border: 2px solid #168AAD;
   transition: border ease 0.4s;
+}
+
+#login-password, #signup-password{
+  width: 50%;
+  padding: 10px 10px;
+  box-sizing: border-box;
+  margin: 5px;
 }
 
 input[type=submit]{
@@ -79,4 +86,16 @@ button:hover{
 
 .pointsBox{
   text-align: center;
+}
+
+header{
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+#login-inputs, #signup-inputs{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

@@ -6,7 +6,6 @@ import Header from '../containers/header.jsx';
 
 const App = (props) => {
 
-  
   const [listItem, setListItem] = useState('');
   const [priority, setPriority] = useState('');
   const [itemList, setItemList] = useState([]);
@@ -14,32 +13,36 @@ const App = (props) => {
 
   // EQUIVALENT TO COMPONENTDIDMOUNT()
   useEffect(() => {
-    //if (user){
-      fetchData();
-    //}
-    // getDogFact();
+    if (props.user !== ''){
+      fetchData(props.user);
+    }
   },[])
 
-  async function fetchData(username){
-    const response = await(fetch('/update'));
-    const list = await response.json();
-    setItemList(list)
+  //WILL NEED TO RETURN USER AND LIST INFORMATION WITH EACH FETCH
+  async function fetchData(user){
+    console.log('user is: ', user);
+    try{
+      const response = await fetch('/update/getList', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          username: user
+        })
+      });
+      if (response.status === 200){
+        const list = await response.json();
+        console.log('this is the list: ', list);
+        setItemList(list)
+      }
+      
+      
+    }
+    catch(err) {
+      console.log('there was an error retrieving data from database! ', err);
+    }
   }
-  // //PROMISE SYNTAX
-  // function fetchData () {
-  //   console.log('going to fetch');
-  //   fetch('/update')
-  //   .then(response => {
-  //     // console.log('this is the response', response)
-  //     return response.json();
-  //   })
-  //   .then(list => {
-  //     // console.log('this is the list of todos:', list);
-  //     setItemList(list);
-  //   }).catch(err => {
-  //     console.log('There was an error retreiving the to-do list: ', err);
-  //   })
-  // }
 
   // async function getDogFact(){
   //   console.log('CALLING DOG API')
@@ -50,23 +53,32 @@ const App = (props) => {
 
   async function handleSubmit(e){
     e.preventDefault();
-    const response = await fetch('/update', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        listItem: listItem,
-        priority: priority
-      })
-    });
-    const list = await response.json();
-    setItemList(list);
-    setListItem('');
-    setPriority('');
+    try{
+      const response = await fetch('/update/addItem', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          username: props.user,
+          listItem: listItem,
+          priority: priority
+        })
+      });
+      if (response.status === 200){
+        const list = await response.json();
+        setItemList(list);
+        setListItem('');
+        setPriority('');
+      }
+    }
+    catch(err){
+      console.log('There was an error adding an item')
+    }
+    
   }
 
-  async function handleDelete(id, priority){
+  async function handleDelete(todo, priority){
     const pointSystem = {
       "High": 5,
       "Moderate": 3,
@@ -80,18 +92,18 @@ const App = (props) => {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        _id: id
+        todo,
+        username: props.user
       })
     });
     const list = await response.json();
+    //console.log(list.list);
     setItemList(list);
   }
 
   return (
     <div id='app'>
-      <Header 
-        handleSetUser={props.handleSetUser}
-      />
+      <Header />
       <h1>MINIMA-LIST</h1>
       <ItemCreator 
         text={listItem} 

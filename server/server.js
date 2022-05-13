@@ -2,10 +2,9 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const path = require('path');
-const request = ('request');
-const cors = require('cors');
-require('dotenv');
-
+const cookieParser = require('cookie-parser')
+const updateRouter = require('./routes/update.js');
+const authRouter = require('./routes/auth.js');
 
 app.listen(3000, () => {
   console.log('LISTENING ON PORT 3000');
@@ -26,10 +25,10 @@ mongoose.connect(MONGO_URI, {
   .catch(err => console.log(err));
 
 
-  app.use((req, res, next)=> {
-    res.header('Access-Controll-Allow-Origin', '*');
-    next()
-  })
+  // app.use((req, res, next)=> {
+  //   res.header('Access-Controll-Allow-Origin', '*');
+  //   next()
+  // })
   
 
 /*
@@ -37,18 +36,14 @@ mongoose.connect(MONGO_URI, {
 */
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(cors());
+app.use(cookieParser());
+//app.use(cors());
 
 /*
 * ***** DEFINING ROUTES *******
 */
-
-const updateRouter = require('./routes/update.js');
 app.use('/update', updateRouter);
-
-// app.get('/dogfact', (req,res) => {
-//   res.status(200);
-// })
+app.use('/auth', authRouter);
 
 /*
  ****** ROUTE HANDLER TO RESPOND WITH THE MAIN APPLICATION ****** 
@@ -65,7 +60,7 @@ if (process.env.NODE_ENV === 'production'){
  ******* CATCH-ALL ROUTE HANDLER FOR UNKNOWN ROUTES *******
  */
 // catch-all route handler for any requests to an unknown route
-app.use((req, res) => res.status(404).send('Can\'t find it!'));
+app.use('/*', (req, res) => res.status(404).send('NOT A ROUTE'));
 
 /*
 ****** GLOBAL ERROR HANDLER ******
