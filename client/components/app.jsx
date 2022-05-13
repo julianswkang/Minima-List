@@ -13,15 +13,9 @@ const App = (props) => {
 
   // EQUIVALENT TO COMPONENTDIDMOUNT()
   useEffect(() => {
-    console.log("hello");
     if (props.user !== ''){
       fetchData(props.user);
     }
-    // if (user){
-    //   //setUser(props.user);
-    //   console.log("There is a user!");
-    //   fetchData(user);
-    // }
   },[])
 
   //WILL NEED TO RETURN USER AND LIST INFORMATION WITH EACH FETCH
