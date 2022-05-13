@@ -99,7 +99,7 @@ const App = (props) => {
       },
       body: JSON.stringify({
         todo,
-        username
+        username: props.user
       })
     });
     const list = await response.json();

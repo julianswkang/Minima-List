@@ -11,17 +11,6 @@ const Signup = (props) => {
   async function handleSubmit(e){
     e.preventDefault();
     try{
-      // console.log('clicking submit!')
-      // let response = await fetch('/auth/signup', {
-      //   method: 'POST',
-      //   headers:{
-      //     'Content-Type': 'application/json'
-      //   },
-      //   body: JSON.stringify({
-      //     username,
-      //     password
-      //   })
-      // });
       const response = await axios.post('/auth/signup', {
         username,
         password
@@ -34,13 +23,12 @@ const Signup = (props) => {
         setPassword('');
         navigate('/');
       }
-      
     }
     catch(err){
       console.log('there was an error signing up user in database! ', err);
     }
   }
-  //console.log("at sign up!");
+
   return(
     <div id="signup">
       <Header />
