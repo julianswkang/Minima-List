@@ -17,8 +17,8 @@ authController.signUp = async function(req, res, next){
   }
   try{
     //will first check if username already exists
-    const user = await User.findOne({username})
     //if username already exists, will send error to global error handler
+    const user = await User.findOne({username})
     if (user) {
       const err = {
         log: 'Express caught error in sign up controller. Username already exists',
@@ -28,16 +28,13 @@ authController.signUp = async function(req, res, next){
       return next(err);
     } 
     else {
-      console.log('username is: ', username);
-      console.log('password is: ', password);
+      //creating new user if username does not already exist
       const newUser = await User.create({username: username, password: password, list:[]});
-      console.log('new user in authController sign up is:', newUser);
       if (newUser){
         res.locals.userId = newUser.id;
         return next();
       }
     }
-    //otherwise, will create a username with stored password 
   }
   catch(e){
     return next({
@@ -48,7 +45,7 @@ authController.signUp = async function(req, res, next){
   }
   
 }
-
+//controller function to log user in
 authController.logIn = async function(req, res, next){
   const {username, password} = req.body
   //if username OR password not provided, will send error
@@ -61,19 +58,21 @@ authController.logIn = async function(req, res, next){
     return next(err)
   }
   try{
+    //will check database to see if username exists
     const user = await User.findOne({ username })
     const err = {
       log: 'Express caught error in login authcontroller. Username or password incorrect',
       status: 400,
       message: {err: 'Username or password incorrect.'},
     };
+    //if username does not exist
     if (!user) {
       return next(err);
     } 
+    //otherwise will check to see if password matches the saved password on the databse
     else {
-      console.log('user in authController.login is: ', user);
-      res.locals.userId = user.id;
       if (password === user.password){
+        res.locals.userId = user.id;
         res.locals.username = username;
         return next();
       } 
@@ -81,7 +80,6 @@ authController.logIn = async function(req, res, next){
         return next(err);
       }
     }
-    
   }
   catch (err) {
     const error = {
@@ -91,9 +89,6 @@ authController.logIn = async function(req, res, next){
     };
     return next(error);
   }
-
 }
-
-
 
 module.exports = authController;

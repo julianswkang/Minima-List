@@ -25,13 +25,6 @@ mongoose.connect(MONGO_URI, {
   .then(() => console.log('Connected to Mongo DB.'))
   .catch(err => console.log(err));
 
-
-  // app.use((req, res, next)=> {
-  //   res.header('Access-Controll-Allow-Origin', '*');
-  //   next()
-  // })
-  
-
 /*
  ******* HANDLE PARSING INTO REQUEST BODY ****** 
 */
