@@ -5,6 +5,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser')
 const updateRouter = require('./routes/update.js');
 const authRouter = require('./routes/auth.js');
+require('dotenv').config({ path: path.resolve(__dirname, '../.env')})
 
 app.listen(3000, () => {
   console.log('LISTENING ON PORT 3000');
@@ -13,23 +14,16 @@ app.listen(3000, () => {
  ****** CONNECTING TO MONGODB ******
  */
 //need to utilize env file
-const MONGO_URI = 'mongodb+srv://juliankang:codesmith@cluster0.638vd.mongodb.net/todolist?retryWrites=true&w=majority';
+const MONGO_URI = process.env.MONGODB_CONNECTIONSTRING;
 mongoose.connect(MONGO_URI, {
   // options for the connect method to parse the URI
   useNewUrlParser: true,
   useUnifiedTopology: true,
   // sets the name of the DB that our collections are part of
-  dbName: 'todolist'
+  dbName: 'minimalist'
 })
   .then(() => console.log('Connected to Mongo DB.'))
   .catch(err => console.log(err));
-
-
-  // app.use((req, res, next)=> {
-  //   res.header('Access-Controll-Allow-Origin', '*');
-  //   next()
-  // })
-  
 
 /*
  ******* HANDLE PARSING INTO REQUEST BODY ****** 

@@ -1,7 +1,8 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 
-const Header = (props) => {
+//Provides links to the various pages via React Router
+const Header = () => {
   return(
     <div>
       <header>

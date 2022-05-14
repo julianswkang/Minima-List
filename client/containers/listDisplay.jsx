@@ -1,13 +1,14 @@
 import React from 'react';
-import { render } from 'react-dom';
 import ListItem from '../components/listItem.jsx'
 
-
+//Display the list provided by App component
+//props = {list, handleDelete()}
 const ListDisplay = (props) => {
-  console.log(props);
   let listLength = props.list.length;
   let propsList = props.list;
+
   const list = [];
+  //iterate through the list and individually create a ListItem component
   for (let i = 0; i < listLength; i++){
     const {todo, priority, date} = propsList[i];
     list.push(
@@ -25,7 +26,7 @@ const ListDisplay = (props) => {
   return (
     <div className='listBox'>
       <div className='listTitle'>
-        <h3>To-Do's to do: </h3>
+        <h3>Tasks to accomplish!</h3>
       </div>
       <ol className='todoList'>
         {list}

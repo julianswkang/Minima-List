@@ -1,26 +1,16 @@
-const User = require('../models/listItem');
+const User = require('../models/user');
 
 
 const listController = {};
 
+//addItem function to handle add item logic
 listController.addItem = async function (req, res, next) {
   const { listItem, priority, username } = req.body;
-  // console.log('this list item is: ', listItem)
-  // console.log('this priority is', priority)
-  // Todo.create({listItem, priority})
-  //   .then(item => {
-  //     res.locals.item = item;
-  //     return next();
-  //   }).catch(err => {
-  //     return next({
-  //       log: "error with listController.addItem" , err,
-  //       status: 500,
-  //       message: {err : "There was an error creating the to-do item!"}
-  //     })
-  //   })
 
+  //will check to see find user
   try{
     const found = await User.findOne({username});
+    //if for whatever reason the user does not exist on database, will throw an error
     if (!found) {
       return next({
         log: 'error with listController.addItems', err,
@@ -28,9 +18,11 @@ listController.addItem = async function (req, res, next) {
         message: {err : 'There was an error when retrieving a user!'}
       })
     }
+    //creating list with new item added on 
     const newList = [...found.list, {todo: listItem, priority: priority, date: Date.now()}]
-    
+    //updating the current user's list with the new list
     await User.findOneAndUpdate({username}, {list: newList})
+    //adding the newList to res.locals
     res.locals.updated = newList;
     return next();
   } catch(err) {
@@ -40,25 +32,11 @@ listController.addItem = async function (req, res, next) {
       message: {err: 'There was an error when adding a list item'}
     })
   }
-
-  // try{
-  //   await User.updateOne({username}, { '$push' : { 'list': { 'todo': todo }}}, {safe: true})
-  //   return next();
-  // } catch(err){
-  //   return next({
-  //     log: 'error with listController.addItems', err,
-  //     status: 500,
-  //     message: {err: 'There was an error when adding a list item'}
-  //   })
-  // } 
 };
 
+//function to get items from the database
 listController.getItems = async function (req, res, next) {
   const { username } = req.body;
-  // User.find({user}, 'list points')
-  //   .then(info => {
-  //     res.locals.info = info;
-  //   })
   try{
     const found = await User.findOne({username});
     if (!found) {
@@ -68,7 +46,6 @@ listController.getItems = async function (req, res, next) {
         message: {err : 'There was an error when retrieving list of to-do item(s)!'}
       })
     }
-    console.log('found user in listController.getItems:', found);
     res.locals.items = found.list;
     return next();
   } catch(err){
@@ -78,14 +55,13 @@ listController.getItems = async function (req, res, next) {
       message: {err: 'There was an error accessing the database when retrieving to-do items'}
     })
   }
-  //will need to find all based on passed in username, and return username and list items 
+
 };
 
+//function to edit a specific list item.. functionality not operational yet.
 listController.editItem = function(req, res, next) {
 
   const {_id, newItem, newPriority} = req.body;
-  // {new: true} --> ensures that 'updated' is the updated list item
-  // compared to without it, where update would be the old list item
   Todo.findOneAndUpdate({ _id}, {listItem: newItem, priority: newPriority}, {new: true})
     .then(updated => {
       console.log(updated);
@@ -100,6 +76,7 @@ listController.editItem = function(req, res, next) {
     })
 };
 
+//function to delete a specific list item based on the specific todo passed to the server
 listController.deleteItem = async function (req, res, next){
   const { todo, username } = req.body;
 
@@ -115,19 +92,6 @@ listController.deleteItem = async function (req, res, next){
       message: {err : "There was an error deleting the to-do item!"}
     })
   } 
-
-  // Todo.findOneAndDelete({ _id })
-  //   .then(deleted => {
-  //     res.locals.deleted = deleted;
-  //     return next();
-  //   }).catch(err=> {
-  //     
-  //   })
-
-  //first need to find username
-  //then need to get that usernames list 
-  //need to filter that list and remove the item that matches the passed in item
-  //need to return that updated item ? maybe
 };
 
 module.exports = listController;
