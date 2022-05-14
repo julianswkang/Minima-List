@@ -1,4 +1,4 @@
-const User = require('../models/listItem');
+const User = require('../models/user');
 
 
 const listController = {};

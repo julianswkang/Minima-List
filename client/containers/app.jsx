@@ -1,14 +1,18 @@
 import React, {useState, useEffect} from 'react';
-import { render } from 'react-dom';
-import ListDisplay from '../containers/listDisplay.jsx';
-import ItemCreator from '../containers/itemCreator.jsx';
-import Header from '../containers/header.jsx';
+import ListDisplay from './listDisplay.jsx';
+import ItemCreator from '../components/itemCreator.jsx';
+import Header from './header.jsx';
 
+//Container that houses the Header, ItemCreator, and ListDisplay components
+//Also handles logic for retrieving list from database if user is initialized from Index component
+//List will be sent down via props to the ListDisplay component
+//Also handles submit logic from the ItemCreator and handles delete logic for ListDisplay
 const App = (props) => {
-
+  //Using React Hooks to control state
   const [listItem, setListItem] = useState('');
   const [priority, setPriority] = useState('');
   const [itemList, setItemList] = useState([]);
+  /* To add additional functionality that would keep track of points to improve motivation to complete tasks */
   const [points, setPoints] = useState(0);
 
   // EQUIVALENT TO COMPONENTDIDMOUNT()
@@ -33,23 +37,13 @@ const App = (props) => {
       });
       if (response.status === 200){
         const list = await response.json();
-        console.log('this is the list: ', list);
         setItemList(list)
       }
-      
-      
     }
     catch(err) {
       console.log('there was an error retrieving data from database! ', err);
     }
   }
-
-  // async function getDogFact(){
-  //   console.log('CALLING DOG API')
-  //   const response = await fetch ('/dogfact');
-  //   console.log('response is: ', response);
-    
-  // }
 
   async function handleSubmit(e){
     e.preventDefault();
@@ -75,16 +69,16 @@ const App = (props) => {
     catch(err){
       console.log('There was an error adding an item')
     }
-    
   }
 
   async function handleDelete(todo, priority){
-    const pointSystem = {
-      "High": 5,
-      "Moderate": 3,
-      "Low": 1
-    };
-    setPoints (points + pointSystem[priority]);
+    /* To add additional functionality that would keep track of points to improve motivation to complete tasks */
+    // const pointSystem = {
+    //   "High": 5,
+    //   "Moderate": 3,
+    //   "Low": 1
+    // };
+    // setPoints (points + pointSystem[priority]);
 
     const response = await fetch('/update', {
       method: 'DELETE',
@@ -97,7 +91,6 @@ const App = (props) => {
       })
     });
     const list = await response.json();
-    //console.log(list.list);
     setItemList(list);
   }
 

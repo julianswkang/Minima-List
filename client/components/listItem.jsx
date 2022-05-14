@@ -1,21 +1,15 @@
 import React from 'react';
-import { render } from 'react-dom';
 
 
 
-const listItem = (props) => (
-  
+//List item component that represents each item created by end-user 
+//props = {todo, priority, handleDelete()}
+const ListItem = (props) => (
 <li>
   <div className='listItem'>
-
-    <div className='todo'>
-      {props.todo}
-    </div>
-
-    <div className='priority'>
-      {props.priority}
-    </div>
-
+    <div className='todo'>{props.todo}</div>
+    <div className='priority'>{props.priority}</div>
+    {/* To add functionality to delete items that are not completed */}
     {/* <div className='editButton'>
       <button>Edit</button>
     </div> */}
@@ -23,11 +17,10 @@ const listItem = (props) => (
     <div className='deleteButton'>
       <button onClick={() => props.handleDelete(props.todo, props.priority)}>Finished</button>
     </div>
-
   </div>
 </li>
 );
 
 
 
-export default listItem;
+export default ListItem;

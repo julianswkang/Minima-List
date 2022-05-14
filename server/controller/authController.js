@@ -1,10 +1,9 @@
-const User = require('../models/listItem');
+const User = require('../models/user');
 
 const authController = {};
 
 //controller function to sign up user
 authController.signUp = async function(req, res, next){
-  console.log('here at sign up!');
   const {username, password} = req.body
   res.locals.username = username;
   //if username OR password not provided, will send error
@@ -31,19 +30,20 @@ authController.signUp = async function(req, res, next){
     else {
       console.log('username is: ', username);
       console.log('password is: ', password);
-      const newUser = await User.create({username: username, password: password});
+      const newUser = await User.create({username: username, password: password, list:[]});
       console.log('new user in authController sign up is:', newUser);
-      res.locals.userId = newUser.id;
-      return next();
+      if (newUser){
+        res.locals.userId = newUser.id;
+        return next();
+      }
     }
     //otherwise, will create a username with stored password 
-
   }
   catch(e){
     return next({
-      log: 'There was an error accessing the database while creating a user',
+      log: `There was an error accessing the database while creating a user, ${e}`,
       status: 500,
-      message: {err: 'Error with database'}
+      message: {err: `Error with database: ${e}`}
     })
   }
   

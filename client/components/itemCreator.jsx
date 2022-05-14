@@ -1,7 +1,7 @@
 import React from 'react';
-import { render } from 'react-dom';
-import Header from '../containers/header.jsx';
 
+//provides the interface to create a list item 
+//props={handleSubmit(), handleChangeListItem(), handleChangePriority()}
 const ItemCreator = (props) => {
   
   return (
@@ -24,14 +24,15 @@ const ItemCreator = (props) => {
         </form>
       </div>
   
-      <div className="pointsBox">
+      {/* To add additional functionality that would keep track of points to improve motivation to complete tasks */}
+      {/* <div className="pointsBox">
         <div>
           Points: {props.points}
         </div>
         <div>
           <button className='usepoints'>Use points!</button>
         </div>
-      </div>
+      </div> */}
       
     </div>
   );

@@ -1,5 +1,5 @@
 const Session = require('../models/sessiondb');
-const User = require('../models/listItem');
+const User = require('../models/user');
 const { v4: uuidv4} = require('uuid');
 
 const sessionController = {};
