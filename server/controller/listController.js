@@ -58,6 +58,10 @@ listController.getItems = async function (req, res, next) {
 
 };
 
+  /*
+  TODO: Need to verify that this logic works for editing a list item
+  */
+
 //function to edit a specific list item.. functionality not operational yet.
 listController.editItem = function(req, res, next) {
 
@@ -76,6 +80,9 @@ listController.editItem = function(req, res, next) {
     })
 };
 
+  /*
+  TODO: Need to verify that this logic works to delete and item
+  */
 //function to delete a specific list item based on the specific todo passed to the server
 listController.deleteItem = async function (req, res, next){
   const { todo, username } = req.body;

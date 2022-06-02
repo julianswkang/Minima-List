@@ -71,6 +71,9 @@ const App = (props) => {
     }
   }
 
+  /*
+  TODO: Need to figure out logic to delete a list item
+  */
   async function handleDelete(todo, priority){
     /* To add additional functionality that would keep track of points to improve motivation to complete tasks */
     // const pointSystem = {
@@ -93,6 +96,10 @@ const App = (props) => {
     const list = await response.json();
     setItemList(list);
   }
+
+    /*
+  TODO: Need to figure out logic to edit an item
+  */
 
   return (
     <div id='app'>

@@ -91,4 +91,12 @@ authController.logIn = async function(req, res, next){
   }
 }
 
+  /*
+  TODO: Need logic to verify user prior to accessing database. Will need to add this middleware function at the beginning of each middleware chain
+  Will need to access the session db and compare the session on cookie with the session on the session db
+  ALSO! Now that we can pull data from session db, we can use the session to find the userid associated
+  So now, we don't need to send the username from the front end each time, can simply pull the userid from the session in the backend
+  Without reliance on the front end to send the user information
+  */
+
 module.exports = authController;
