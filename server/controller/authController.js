@@ -91,4 +91,9 @@ authController.logIn = async function(req, res, next){
   }
 }
 
+  /*
+  TODO: Need logic to verify user prior to accessing database. Will need to add this middleware function at the beginning of each middleware chain
+  Will need to access the session db and compare the session on cookie with the session on the session db
+  */
+
 module.exports = authController;
