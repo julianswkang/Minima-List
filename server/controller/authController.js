@@ -1,4 +1,5 @@
 const User = require('../models/user');
+const bcrypt = require('bcrypt');
 
 const authController = {};
 
@@ -71,7 +72,9 @@ authController.logIn = async function(req, res, next){
     } 
     //otherwise will check to see if password matches the saved password on the databse
     else {
-      if (password === user.password){
+      const isValidated = await bcrypt.compare(password, user.password);
+
+      if (isValidated){
         res.locals.userId = user.id;
         res.locals.username = username;
         return next();
