@@ -32,5 +32,9 @@ userSchema.pre('save', function(next) {
   }
 })
 
+//adding a method in order to validate the password that is provided by user
+userSchema.methods.validatePassword = async function validatePassword(data){
+  return bcrypt.compare(data, this.password);
+}
 
 module.exports = User;
