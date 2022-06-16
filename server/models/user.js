@@ -19,22 +19,21 @@ const userSchema = new Schema({
   points: Number
 })
 
-const User = mongoose.model('User', userSchema);
+
 
 //adding bcrypt salt hashing to the current password to store a hash in the database
 userSchema.pre('save', function(next) {
   try {
     const salt = bcrypt.genSaltSync(BCRYPT_SALT);
-    this.password = bcrypt.hashSync(this.password, salt);
+    const hash = bcrypt.hashSync(this.password, salt);
+    console.log(hash);
+    this.password = hash;
     return next();
   } catch (err){
     return next(err);
   }
 })
 
-//adding a method in order to validate the password that is provided by user
-userSchema.methods.validatePassword = async function validatePassword(data){
-  return bcrypt.compare(data, this.password);
-}
+const User = mongoose.model('User', userSchema);
 
 module.exports = User;
