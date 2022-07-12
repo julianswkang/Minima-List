@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "homepage": "https://julianswkang.github.io/Minima-List/",
+  "homepage": "https://julianswkang.github.io/Minima-List",
   "scripts": {
     "start": "NODE_ENV=production nodemon server/server.js",
     "dev": "NODE_ENV=development nodemon server/server.js & NODE_ENV=development webpack serve --open",
