@@ -13,6 +13,7 @@ const Index = () => {
   const [user, setUser] = useState("");
 
   return (
+    //basename is used so react router understands deployed root page
     <BrowserRouter basename={"https://julianswkang.github.io/Minima-List/"}>
       <Routes>
         <Route path="/" element={<App user={user} />} />
