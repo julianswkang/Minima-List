@@ -14,13 +14,13 @@ const Index = () => {
 
   return (
     //basename is used so react router understands deployed root page
-    <BrowserRouter basename={"https://julianswkang.github.io/Minima-List"}>
+    <HashRouter basename={"https://julianswkang.github.io/Minima-List"}>
       <Routes>
         <Route path="/" element={<App user={user} />} />
-        <Route path="login" element={<Login handleSetUser={setUser} />} />
-        <Route path="signup" element={<Signup handleSetUser={setUser} />} />
+        <Route path="/login" element={<Login handleSetUser={setUser} />} />
+        <Route path="/signup" element={<Signup handleSetUser={setUser} />} />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 };
 
